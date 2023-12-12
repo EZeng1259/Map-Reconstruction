@@ -30,7 +30,7 @@ public class FinishedClick : MonoBehaviour {
             var newLine = string.Format("{0},{1},{2},{3}", PlayerID.id, objNames[i], xPos, yPos);
             csv.AppendLine(newLine);
         }
-        string filePath = @"UserData/StreamingAssets/MapData/coordinatesList_" + PlayerID.id + ".csv";
+        string filePath = @"UserData/MapData/coordinatesList_" + PlayerID.id + ".csv";
         //after your loop
         File.WriteAllText(filePath, csv.ToString());
         // move to next scene
