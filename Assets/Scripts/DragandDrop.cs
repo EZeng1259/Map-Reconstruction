@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
+using TMPro;
+using UnityEngine.SceneManagement;
+using System.IO;
 
 public class DragandDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler {
 	private RectTransform rectTransform;
-/*
+	private string filename;
+	private float startTime; 
+
 	public void Start () {
-		image.SetActive(false);
-	}
-	
-	public void OnPointerEnter(PointerEventData eventData){
-		image.SetActive(true);
+		filename = @"UserData/MapData/buildingOrder_" + PlayerID.id + ".csv";
+		startTime = Time.time; 
 	}
 
-	public void OnPointerExit(PointerEventData eventData){
+	/*public void OnPointerExit(PointerEventData eventData){
 		image.SetActive(false);
 	}*/
 
@@ -36,7 +39,15 @@ public class DragandDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 	}
 
 	public void OnEndDrag(PointerEventData eventData){
-		Debug.Log("EndDrag");
+		Debug.Log(rectTransform.position);
+		if(rectTransform.position.x < 475 && rectTransform.position.x > 90 && rectTransform.position.y > 40 && rectTransform.position.y < 440)
+		{
+			TextWriter writer = new StreamWriter(filename, true);
+
+			float currTime = Time.time - startTime; 
+			writer.WriteLine(currTime + "," + rectTransform.name);
+		}
+
 	}
 
 }
